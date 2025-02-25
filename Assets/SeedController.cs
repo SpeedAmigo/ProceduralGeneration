@@ -10,14 +10,15 @@ public class SeedController : MonoBehaviour
     public List<GameObject> roomPrefabs;
     public int maxRooms;
     public Vector2Int mapSize;
-    public HashSet<Vector2Int> occupiedCells = new();
     
     [SerializeField] private TMP_InputField inputField;
     
     private List<Vector2> roomPositions = new();
     private List<GameObject> boxList = new();
-    //private SeedManager seedManager = new();
+    private HashSet<Vector2> occupiedCells = new();
     private Delaunator delaunator;
+
+    private bool validPos;
     
     public void InputSeed()
     {
@@ -42,23 +43,43 @@ public class SeedController : MonoBehaviour
             int flipIndex = Random.Range(0, 1000) % 2 == 0 ? 90 : 0;
             int index = Random.Range(0, roomPrefabs.Count);
             
+            GameObject room = Instantiate(roomPrefabs[index], Vector2.zero, Quaternion.identity);
+            RoomController roomScript = room.GetComponent<RoomController>();
+            
             Vector2Int position;
             do
             {
+                validPos = true;
+                
                 position = new Vector2Int(
                     Random.Range(-mapSize.x, mapSize.x),
                     Random.Range(-mapSize.y, mapSize.y));
-            } while (occupiedCells.Contains(position));
+                
+                foreach (Vector2 localPos in roomScript.GetCellLocations())
+                {
+                    Vector2 worldPos = (Vector2)position + localPos;
+                    if (occupiedCells.Contains(worldPos))
+                    {
+                        validPos = false;
+                        break;
+                    }
+                }
+                
+            } while (!validPos);
+
+            room.transform.position = new Vector2(position.x, position.y);
+            room.transform.eulerAngles = new Vector3(0, 0, flipIndex);
             
-            GameObject room = Instantiate(roomPrefabs[index], new Vector3(
-                position.x,
-                position.y,
-                0),
-                Quaternion.Euler(0, 0, flipIndex));
+            
             Debug.Log(room.transform.position);
             boxList.Add(room);
             roomPositions.Add(new Vector2(room.transform.position.x, room.transform.position.y));
-            occupiedCells.AddRange(room.GetComponent<RoomController>().GetCellLocations());
+            
+            foreach (Vector2 pos in roomScript.GetCellLocations())
+            {
+                occupiedCells.Add(room.transform.position);
+                occupiedCells.Add(room.transform.TransformPoint(pos));
+            }
         }
         CreateConnections();
         foreach (var value in occupiedCells)

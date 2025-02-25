@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
-    public List<Vector2Int> cellLocations = new();
+    public List<Vector2> cellLocations = new();
     
-    public List<Vector2Int> GetCellLocations()
+    public List<Vector2> GetCellLocations()
     {
         cellLocations = new(transform.childCount);
         
         for (int i = 0; i < transform.childCount; i++)
         {
-            Vector2Int pos = new Vector2Int(
-                (int)transform.GetChild(i).position.x,
-                (int)transform.GetChild(i).position.y);
+            Vector2 pos = new Vector2(
+                transform.GetChild(i).localPosition.x,
+                transform.GetChild(i).localPosition.y);
             
             cellLocations.Add(pos);
         }

@@ -885,8 +885,8 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 34657184525354335, guid: 0aaeeddecf53a7d46bba8542c7dc8128, type: 3}
   - {fileID: 8443108514625154135, guid: f4ab0c9fa6cc16c47ad72c7cab05a58b, type: 3}
-  maxRooms: 5
-  mapSize: {x: 10, y: 10}
+  maxRooms: 50
+  mapSize: {x: 50, y: 50}
   inputField: {fileID: 8273188}
 --- !u!4 &1148726338
 Transform:
@@ -998,7 +998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1357117445
 MonoBehaviour:
   m_ObjectHideFlags: 0
