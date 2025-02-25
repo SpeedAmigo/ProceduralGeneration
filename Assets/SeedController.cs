@@ -1,51 +1,30 @@
-using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using DelaunatorSharp;
+using Unity.VisualScripting;
 
 public class SeedController : MonoBehaviour
 {
-    private List<GameObject> boxList = new();
-    private float[] noiseValues;
-    private GameObject[] boxes;
+    public List<GameObject> roomPrefabs;
+    public int maxRooms;
+    public Vector2Int mapSize;
+    public HashSet<Vector2Int> occupiedCells = new();
+    
     [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private string seedString;
-    [SerializeField] private int seed;
-
-    private SeedManager seedManager = new SeedManager();
-
-    private void Start()
-    {
-        seedManager.SetRandomSeed();
-        seed = seedManager.Seed;
-        inputField.text = seedManager.SeedString;
-    }
+    
+    private List<Vector2> roomPositions = new();
+    private List<GameObject> boxList = new();
+    //private SeedManager seedManager = new();
+    private Delaunator delaunator;
     
     public void InputSeed()
     {
-        seedString = inputField.text;
-        seedManager.SetSeed(seedString);
-        seed = seedManager.Seed;
+        SeedManager.SetSeed(inputField.text);
     }
     
-    public void GenerateNumbers()
-    {
-        Random.InitState(seedManager.Seed);
-        noiseValues = new float[10];
-        
-        Debug.Log($"Input seed: {seedManager.SeedString}, World seed: {seedManager.Seed}");
-
-        for (int i = 0; i < noiseValues.Length; i++)
-        {
-            noiseValues[i] = Random.value * 10;
-            Debug.Log((int)noiseValues[i]);
-        } 
-    }
-
-    public void CreateBoxes()
+    public void GenerateRooms()
     {
         if (boxList.Count > 0)
         {
@@ -56,18 +35,78 @@ public class SeedController : MonoBehaviour
             boxList.Clear();
         }
         
-        Random.InitState(seedManager.Seed);
-        boxes = new GameObject[5];
-
-        for (int i = 0; i < boxes.Length; i++)
+        Random.InitState(SeedManager.Seed);
+        
+        for (int i = 0; i < maxRooms; i++)
         {
-            boxes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            boxes[i].transform.position = new Vector3(
-                Random.Range(-5, 5),
-                Random.Range(-5, 5),
-                0);
-            boxList.Add(boxes[i]);
-            Debug.Log(boxes[i].transform.position);
+            int flipIndex = Random.Range(0, 1000) % 2 == 0 ? 90 : 0;
+            int index = Random.Range(0, roomPrefabs.Count);
+            
+            Vector2Int position;
+            do
+            {
+                position = new Vector2Int(
+                    Random.Range(-mapSize.x, mapSize.x),
+                    Random.Range(-mapSize.y, mapSize.y));
+            } while (occupiedCells.Contains(position));
+            
+            GameObject room = Instantiate(roomPrefabs[index], new Vector3(
+                position.x,
+                position.y,
+                0),
+                Quaternion.Euler(0, 0, flipIndex));
+            Debug.Log(room.transform.position);
+            boxList.Add(room);
+            roomPositions.Add(new Vector2(room.transform.position.x, room.transform.position.y));
+            occupiedCells.AddRange(room.GetComponent<RoomController>().GetCellLocations());
         }
+        CreateConnections();
+        foreach (var value in occupiedCells)
+        {
+            Debug.Log(value);
+        }
+    }
+
+    private void CreateConnections()
+    {
+        List<IPoint> coords = new();
+        foreach (var point in roomPositions)
+        {
+            coords.Add(new Point(point.x, point.y));
+        }
+        
+        delaunator = new Delaunator(coords.ToArray());
+
+        for (int i = 0; i < delaunator.Triangles.Length; i+=3)
+        {
+            int a = delaunator.Triangles[i];
+            int b = delaunator.Triangles[i + 1];
+            int c = delaunator.Triangles[i + 2];
+            
+            Debug.Log($"Triangle: {roomPositions[a]}, {roomPositions[b]}, {roomPositions[c]}");
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if (delaunator == null) return;
+        
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < delaunator.Triangles.Length; i += 3)
+        {
+            int a = delaunator.Triangles[i];
+            int b = delaunator.Triangles[i + 1];
+            int c = delaunator.Triangles[i + 2];
+            
+            Gizmos.DrawLine(roomPositions[a], roomPositions[b]);
+            Gizmos.DrawLine(roomPositions[b], roomPositions[c]);
+            Gizmos.DrawLine(roomPositions[c], roomPositions[a]);
+        }
+    }
+    
+    private void Start()
+    {
+        SeedManager.SetRandomSeed();
+        inputField.text = SeedManager.SeedString;
     }
 }

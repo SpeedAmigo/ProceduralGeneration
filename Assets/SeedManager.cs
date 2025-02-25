@@ -1,27 +1,27 @@
 using UnityEngine;
 
-public class SeedManager
+public static class SeedManager
 {
-    private int _seed;
-    private string _seedString;
+    private static int _seed;
+    private static string _seedString;
 
-    public int Seed
+    public static int Seed
     {
         get { return _seed; }
     }
 
-    public string SeedString
+    public static string SeedString
     {
         get { return _seedString; }
     }
     
-    public void SetSeed(string input)
+    public static void SetSeed(string input)
     {
         _seedString = input;
         ConvertStringToInt(input);
     }
 
-    public void SetRandomSeed()
+    public static void SetRandomSeed()
     {
         string seedString = "";
         for (int i = 0; i < 10; i++)
@@ -33,8 +33,7 @@ public class SeedManager
         ConvertStringToInt(seedString);
     }
     
-    
-    private void ConvertStringToInt(string input)
+    private static void ConvertStringToInt(string input)
     {
         long hash = 0;
         foreach (char c in input)
