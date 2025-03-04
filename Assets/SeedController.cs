@@ -25,6 +25,7 @@ public class SeedController : MonoBehaviour
         SeedManager.SetSeed(inputField.text);
     }
     
+    /*
     public void GenerateRooms()
     {
         if (boxList.Count > 0)
@@ -68,7 +69,7 @@ public class SeedController : MonoBehaviour
             } while (!validPos);
 
             room.transform.position = new Vector2(position.x, position.y);
-            room.transform.eulerAngles = new Vector3(0, 0, flipIndex);
+            //room.transform.eulerAngles = new Vector3(0, 0, flipIndex);
             
             
             Debug.Log(room.transform.position);
@@ -124,6 +125,7 @@ public class SeedController : MonoBehaviour
             Gizmos.DrawLine(roomPositions[c], roomPositions[a]);
         }
     }
+    */
     
     private void Start()
     {
