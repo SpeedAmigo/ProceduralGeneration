@@ -14,6 +14,8 @@ public class RandomDungeonGeneratorEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+        
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Generate"))
         {
             generator.GenerateDungeon();
@@ -23,7 +25,8 @@ public class RandomDungeonGeneratorEditor : Editor
         {
             generator.GenerateDungeonNewSeed();
         }
-
+        EditorGUILayout.EndHorizontal();
+        
         if (GUILayout.Button("Clear"))
         {
             generator.ClearMap();

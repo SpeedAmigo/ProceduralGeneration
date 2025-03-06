@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 8
-    y: 51
+    x: 0
+    y: 43
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
-  m_Maximized: 0
+  m_Maximized: 1
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 137
+  controlID: 132
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -452,8 +452,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 87
+    x: 0
+    y: 79
     width: 483
     height: 740
   m_SerializedDataModeController:
@@ -470,9 +470,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 0cfbffffd88f0000f48f0000
+      m_SelectedIDs: 12a00000
+      m_LastClickedID: 40978
+      m_ExpandedIDs: 28bcffff0cfbfffffc8f000006a00000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -518,8 +518,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 492
-    y: 87
+    x: 484
+    y: 79
     width: 1469
     height: 740
   m_SerializedDataModeController:
@@ -1062,9 +1062,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 8.809445, y: -0.5168867, z: -0.63744926}
+    m_Target: {x: -52.992043, y: 4.8544297, z: -0.43528295}
     speed: 2
-    m_Value: {x: 8.809445, y: -0.5168867, z: -0.63744926}
+    m_Value: {x: -52.992043, y: 4.8544297, z: -0.43528295}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1114,9 +1114,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 66.37557
+    m_Target: 46.15871
     speed: 2
-    m_Value: 66.37557
+    m_Value: 46.15871
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1171,8 +1171,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 853
+    x: 0
+    y: 845
     width: 1215
     height: 501
   m_SerializedDataModeController:
@@ -1197,7 +1197,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1207,16 +1207,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\GitHub\ProceduralGeneration
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fe940000
-    m_LastClickedID: 38142
-    m_ExpandedIDs: 000000009494000096940000989400009a9400009c9400009e940000a0940000069500000a95000000ca9a3b
+    m_SelectedIDs: 9e940000
+    m_LastClickedID: 38046
+    m_ExpandedIDs: 000000009c9400009e940000a0940000a2940000a4940000a6940000a894000000950000089500000c95000010950000069800004ea3000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1245,7 +1245,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009494000096940000989400009a9400009c9400009e940000a0940000
+    m_ExpandedIDs: 000000009c9400009e940000a0940000a2940000a4940000a6940000a8940000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1273,8 +1273,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300009e710000a071000080930000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c62300009e710000a07100008093000050910000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1324,8 +1324,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Console\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1224
-    y: 853
+    x: 1216
+    y: 845
     width: 737
     height: 501
   m_SerializedDataModeController:
@@ -1360,8 +1360,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1963
-    y: 87
+    x: 1955
+    y: 79
     width: 604
     height: 1267
   m_SerializedDataModeController:
